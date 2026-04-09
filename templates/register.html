@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Register — SecureApp{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="sec-badge">&#x2705; Task 1 · 2 · 3 · 5 Active</div>
+  <h2>Create Account</h2>
+  <p class="sub">All fields are validated and sanitized before storage.</p>
+
+  {#
+    Task 3 – CSRF: form.hidden_tag() renders the hidden CSRF token field.
+    Every POST form in the app must include this.
+  #}
+  <form method="post" action="{{ url_for('register') }}">
+    {{ form.hidden_tag() }}
+
+    <div class="field">
+      {{ form.username.label }}
+      {{ form.username(placeholder="e.g. john_doe") }}
+      {% for e in form.username.errors %}
+        <div class="err">{{ e }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="field">
+      {{ form.email.label }}
+      {{ form.email(placeholder="you@example.com") }}
+      {% for e in form.email.errors %}
+        <div class="err">{{ e }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="field">
+      {{ form.password.label }}
+      {{ form.password(placeholder="Min 8 chars, 1 uppercase, 1 number, 1 symbol") }}
+      {% for e in form.password.errors %}
+        <div class="err">{{ e }}</div>
+      {% endfor %}
+    </div>
+
+    {{ form.submit(class="btn") }}
+  </form>
+
+  <p class="link-sm">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+</div>
+{% endblock %}

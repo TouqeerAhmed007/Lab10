@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Upload File — SecureApp{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:560px">
+  <div class="sec-badge">&#x2705; Task 3 Active (Secure Uploads)</div>
+  <h2>Upload File</h2>
+  <p class="sub">Uploads are sanitized using <code>secure_filename</code>. Only authorized extensions (.png, .jpg, .pdf, .txt) are accepted.</p>
+
+  <form method="post" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+    <div class="field" style="margin-top: 20px;">
+      <label for="file"><strong>Select File:</strong></label>
+      <input type="file" name="file" id="file" required style="margin-top: 10px; width: 100%;">
+    </div>
+
+    <button type="submit" class="btn" style="margin-top:20px;">Upload Securely</button>
+  </form>
+</div>
+{% endblock %}

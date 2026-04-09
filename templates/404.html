@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}404 — Page Not Found{% endblock %}
+{% block content %}
+<div class="card" style="text-align:center">
+  <div style="font-size:4rem">&#x1F50D;</div>
+  <h2 style="margin-top:12px;color:#c62828">404 — Page Not Found</h2>
+  <p style="color:#555;margin-top:10px">
+    The page you are looking for does not exist or has been moved.
+  </p>
+  <!-- Task 4: NO stack trace, NO file paths, NO internal details -->
+  <a href="{{ url_for('index') }}" class="btn"
+     style="display:inline-block;margin-top:24px;text-decoration:none;padding:10px 28px;width:auto">
+    Go Home
+  </a>
+</div>
+{% endblock %}

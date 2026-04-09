@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}500 — Server Error{% endblock %}
+{% block content %}
+<div class="card" style="text-align:center">
+  <div style="font-size:4rem">&#x26A0;&#xFE0F;</div>
+  <h2 style="margin-top:12px;color:#c62828">500 — Internal Server Error</h2>
+  <p style="color:#555;margin-top:10px">
+    An unexpected error occurred. Please try again later.
+  </p>
+  <!-- Task 4: generic message — no exception details, no tracebacks -->
+  <a href="{{ url_for('index') }}" class="btn"
+     style="display:inline-block;margin-top:24px;text-decoration:none;padding:10px 28px;width:auto">
+    Go Home
+  </a>
+</div>
+{% endblock %}

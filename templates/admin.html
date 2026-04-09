@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Admin Panel — SecureApp{% endblock %}
+
+{% block content %}
+<div class="card" style="text-align:center">
+  <div class="sec-badge">&#x2705; Task 5 Active (RBAC)</div>
+  <div style="font-size:3rem">&#x1F46E;</div>
+  <h2 style="margin-top:12px; color:#c62828;">Secret Admin Panel</h2>
+  
+  <p class="sub" style="margin-top:8px">
+    If you can see this page, you have successfully bypassed the <code>@admin_required</code> decorator because your account has <strong>Admin Privileges</strong>.
+  </p>
+
+  <div style="background:#e8f5e9;border-radius:8px;padding:20px;margin:24px 0;text-align:left">
+    <b style="color:#2e7d32">&#x1F512; Authorized Access Only</b>
+    <p style="margin-top:10px; color:#333; font-size:.88rem; line-height:1.6">
+      Regular users attempting to visit <code>/admin/dashboard</code> will be immediately ejected by the server and shown the generic 403 Forbidden page.
+    </p>
+  </div>
+
+  <a href="{{ url_for('dashboard') }}" class="btn" style="display:block;text-decoration:none;padding:11px">
+    Return to Dashboard
+  </a>
+</div>
+{% endblock %}

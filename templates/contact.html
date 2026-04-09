@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Contact — SecureApp{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:560px">
+  <div class="sec-badge">&#x2705; Task 1 · 2 · 3 Active</div>
+  <h2>Contact Form</h2>
+  <p class="sub">Input is validated server-side; HTML/SQL injection is rejected.</p>
+
+  <form method="post" action="{{ url_for('contact') }}">
+    {{ form.hidden_tag() }}   {# Task 3: CSRF token #}
+
+    <div class="field">
+      {{ form.name.label }}
+      {{ form.name(placeholder="Your name") }}
+      {% for e in form.name.errors %}<div class="err">{{ e }}</div>{% endfor %}
+    </div>
+
+    <div class="field">
+      {{ form.email.label }}
+      {{ form.email(placeholder="your@email.com") }}
+      {% for e in form.email.errors %}<div class="err">{{ e }}</div>{% endfor %}
+    </div>
+
+    <div class="field">
+      {{ form.phone.label }}
+      {{ form.phone(placeholder="+92 300 0000000") }}
+      {% for e in form.phone.errors %}<div class="err">{{ e }}</div>{% endfor %}
+    </div>
+
+    <div class="field">
+      {{ form.website.label }}
+      {{ form.website(placeholder="https://yoursite.com") }}
+      {% for e in form.website.errors %}<div class="err">{{ e }}</div>{% endfor %}
+    </div>
+
+    <div class="field">
+      {{ form.message.label }}
+      {{ form.message(placeholder="Type your message here…") }}
+      {% for e in form.message.errors %}<div class="err">{{ e }}</div>{% endfor %}
+    </div>
+
+    {{ form.submit(class="btn") }}
+  </form>
+</div>
+{% endblock %}

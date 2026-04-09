@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Secure App{% endblock %}</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      min-height: 100vh;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: #2e7d32;
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 2px 6px #0003;
+    }
+    nav .brand { color: white; font-weight: 700; font-size: 1.1rem; }
+    nav a {
+      color: #c8e6c9;
+      text-decoration: none;
+      font-size: .9rem;
+      transition: color .2s;
+    }
+    nav a:hover { color: white; }
+    nav .spacer { flex: 1; }
+
+    /* ── Card ── */
+    .card {
+      max-width: 500px;
+      margin: 56px auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px #0001;
+      padding: 36px 40px;
+    }
+    .card h2 {
+      margin-bottom: 6px;
+      color: #1b5e20;
+      font-size: 1.4rem;
+    }
+    .card .sub {
+      color: #666;
+      font-size: .85rem;
+      margin-bottom: 24px;
+    }
+
+    /* ── Form fields ── */
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block;
+      font-size: .82rem;
+      font-weight: 600;
+      color: #444;
+      margin-bottom: 5px;
+    }
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: .95rem;
+      transition: border .2s;
+      background: #fafafa;
+    }
+    .field input:focus,
+    .field textarea:focus {
+      border-color: #2e7d32;
+      outline: none;
+      background: white;
+    }
+    .field textarea { resize: vertical; min-height: 90px; }
+    .field .err {
+      color: #c62828;
+      font-size: .78rem;
+      margin-top: 3px;
+    }
+
+    /* ── Button ── */
+    .btn {
+      width: 100%;
+      padding: 11px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: .5px;
+      transition: background .2s;
+    }
+    .btn:hover { background: #1b5e20; }
+
+    /* ── Flash messages ── */
+    .flashes { max-width: 500px; margin: 20px auto 0; }
+    .flash {
+      padding: 10px 16px;
+      border-radius: 5px;
+      margin-bottom: 8px;
+      font-size: .88rem;
+    }
+    .flash.success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #2e7d32; }
+    .flash.danger  { background: #ffebee; color: #c62828; border-left: 4px solid #c62828; }
+    .flash.warning { background: #fff8e1; color: #f57f17; border-left: 4px solid #f9a825; }
+    .flash.info    { background: #e3f2fd; color: #1565c0; border-left: 4px solid #1976d2; }
+
+    /* ── Security badge ── */
+    .sec-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e8f5e9;
+      color: #2e7d32;
+      border: 1px solid #a5d6a7;
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: .75rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .link-sm { font-size: .85rem; color: #555; margin-top: 14px; text-align: center; }
+    .link-sm a { color: #2e7d32; text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">&#x1F512; SecureApp</span>
+  <a href="{{ url_for('register') }}">Register</a>
+  <a href="{{ url_for('login') }}">Login</a>
+  <a href="{{ url_for('contact') }}">Contact</a>
+  {% if session.get('username') %}
+    <span class="spacer"></span>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  {% endif %}
+</nav>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flashes">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+
+</body>
+</html>
